@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: url(img/bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.box {
+  height: 80vh;
+  background-color: #fff;
+  opacity: 0.8;
+}
+
+.display-4 {
+  font-weight: 600 !important;
+}
+
+.display-5 {
+  font-weight: 600 !important;
+}
+
+.form-control:focus {
+  border-color: inherit !important;
+  -webkit-box-shadow: none;
+  box-shadow: none !important;
+}
+
+.city {
+  color: #0077b6;
+}
+
+.temp {
+  color: #f8c865;
+}
+
+.line {
+  color: #6c757d;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.weather {
+  color: #f8c865;
+}
+
+@media all and (max-device-width: 991px) {
+  .city {
+    font-size: 2rem !important;
+  }
+  .temp {
+    font-size: 1.5rem !important;
+  }
+  .weather {
+    font-size: 1.5rem !important;
+  }
+  form .form-control {
+    margin-top: -10px !important;
+  }
+}
