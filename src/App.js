@@ -20,9 +20,19 @@ const App = () => {
   //get weather data
   const getCityName = async (ct) => {
     try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`
-      );
+      const url = `http://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`;
+      let response;
+      // console.log(url.protocol);
+      if (url.protocol === "https:") {
+        response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`
+        );
+      } else {
+        response = await axios.get(
+          `http://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`
+        );
+      }
+      // console.log(response.protocol);
 
       const resData = response.data;
 
@@ -49,7 +59,6 @@ const App = () => {
   const addClass = () => {
     const ct = document.querySelector(".city");
     const ctText = ct.innerHTML;
-    console.log(ctText);
     if (ctText.length > 15) {
       ct.classList.remove("display-4");
       ct.classList.add("display-5");
