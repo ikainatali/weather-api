@@ -105,12 +105,12 @@ const App = () => {
                   params.map((param) => {
                     return (
                       <div key={param.id}>
-                        <h4 className='city mt-3'>
+                        <h6 className='city mt-3'>
                           <span className='name display-4'>
                             {param.ctName},
                           </span>
                           {param.country}
-                        </h4>
+                        </h6>
                         <h5 className='date mt-2'>
                           {today.toLocaleDateString("en-US", options)}
                         </h5>
