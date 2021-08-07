@@ -21,7 +21,7 @@ const App = () => {
   const getCityName = async (ct) => {
     try {
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`
+        `https://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`
       );
 
       const resData = response.data;
