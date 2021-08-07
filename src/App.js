@@ -20,31 +20,21 @@ const App = () => {
   //get weather data
   const getCityName = async (ct) => {
     try {
-      const url = `http://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`;
-      let response;
-      // console.log(url.protocol);
-      if (url.protocol === "https:") {
-        response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`
-        );
-      } else {
-        response = await axios.get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${ct}&units=metric&appid=b5a262716deb2ba36d84498e3056645f`
-        );
-      }
-      // console.log(response.protocol);
-
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/current.json?key=775e854869ce46fe85d180626210708&q=${ct}&aqi=no`
+      );
       const resData = response.data;
 
       setParams([
         {
-          id: resData.id,
-          ctName: resData.name,
-          country: resData.sys.country,
-          temperature: resData.main.temp,
-          minTemperature: resData.main.temp_min,
-          maxTemperature: resData.main.temp_max,
-          weather: resData.weather[0].main,
+          id: Math.floor(Math.random() * 100),
+          ctName: resData.location.name,
+          country: resData.location.country,
+          temperature: resData.current.temp_c,
+          //  minTemperature: resData.main.temp_min,
+          //  maxTemperature: resData.main.temp_max,
+          icon: resData.current.condition.icon,
+          weather: resData.current.condition.text,
         },
       ]);
     } catch (err) {
@@ -57,7 +47,7 @@ const App = () => {
 
   // add remove class to style city name
   const addClass = () => {
-    const ct = document.querySelector(".city");
+    const ct = document.querySelector(".name");
     const ctText = ct.innerHTML;
     if (ctText.length > 15) {
       ct.classList.remove("display-4");
@@ -99,7 +89,7 @@ const App = () => {
               sm={{ span: 8, offset: 2 }}
             >
               <div className='box shadow-lg mt-5 p-4 text-center'>
-                <h4 className='mt-2'>Find Weather</h4>
+                <h1 className='heading mt-2'>Find Weather</h1>
                 <form className='mt-4' onSubmit={onSubmitForm}>
                   <input
                     type='text'
@@ -115,20 +105,20 @@ const App = () => {
                   params.map((param) => {
                     return (
                       <div key={param.id}>
-                        <h1 className=' mt-3'>
-                          <span className='city display-4'>{param.ctName}</span>
-                          ,{param.country}
-                        </h1>
+                        <h4 className='city mt-3'>
+                          <span className='name display-4'>
+                            {param.ctName},
+                          </span>
+                          {param.country}
+                        </h4>
                         <h5 className='date mt-2'>
                           {today.toLocaleDateString("en-US", options)}
                         </h5>
-                        <h1 className='temp mt-4'>{param.temperature}&ordm;</h1>
-                        <p className='display-6'>---------</p>
+                        <h1 className='temp mt-4'>
+                          <img src={param.icon} />
+                          {param.temperature}&ordm;
+                        </h1>
                         <h2 className='weather mt-2'>{param.weather}</h2>
-                        <h5 className='minmax mt-3'>
-                          {param.minTemperature}&ordm; / {param.maxTemperature}
-                          &ordm;
-                        </h5>
                       </div>
                     );
                   })
