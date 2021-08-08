@@ -2,19 +2,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background: url(img/bg.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  padding: 0 !important;
-  margin: 0 !important;
+  background: #e8e8e4 !important;
 }
 
 .box {
@@ -23,10 +11,7 @@ h4 {
   opacity: 0.9;
 }
 
-.display-4 {
-  font-weight: 600 !important;
-}
-
+.display-4,
 .display-5 {
   font-weight: 600 !important;
 }
@@ -37,17 +22,16 @@ h4 {
   box-shadow: none !important;
 }
 
+.country,
 .date {
   color: #868a88;
 }
 
-.city {
-  color: #868a88;
-}
-
-.name,
+.city,
 .heading {
   color: #3b494f;
+  padding: 0;
+  margin: 0;
 }
 .temp {
   color: #0466c8;
@@ -64,17 +48,8 @@ h4 {
   text-transform: capitalize;
 }
 
-@media all and (max-device-width: 991px) {
-  .city {
-    font-size: 2rem !important;
-  }
-  .temp {
-    font-size: 1.5rem !important;
-  }
-  .weather {
-    font-size: 1.5rem !important;
-  }
-  form .form-control {
-    margin-top: -10px !important;
+@media (min-width: 320px) and (max-width: 575px) {
+  h1.temp {
+    font-size: 3rem !important;
   }
 }

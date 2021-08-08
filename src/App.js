@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+//compnents
+import Data from "./components/Data";
+
 //bootstrap
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
@@ -11,8 +14,10 @@ const App = () => {
   const [cityName, setCityName] = useState("");
   const [params, setParams] = useState([]);
 
+  let text;
   const onSubmitForm = (e) => {
     e.preventDefault();
+
     setCityName(city);
     setCity("");
   };
@@ -31,8 +36,6 @@ const App = () => {
           ctName: resData.location.name,
           country: resData.location.country,
           temperature: resData.current.temp_c,
-          //  minTemperature: resData.main.temp_min,
-          //  maxTemperature: resData.main.temp_max,
           icon: resData.current.condition.icon,
           weather: resData.current.condition.text,
         },
@@ -45,38 +48,11 @@ const App = () => {
     }
   };
 
-  // add remove class to style city name
-  const addClass = () => {
-    const ct = document.querySelector(".name");
-    const ctText = ct.innerHTML;
-    if (ctText.length > 15) {
-      ct.classList.remove("display-4");
-      ct.classList.add("display-5");
-    }
-  };
-
   useEffect(() => {
     if (cityName) {
       getCityName(cityName);
     }
   }, [cityName]);
-
-  useEffect(() => {
-    if (params) {
-      params.map((param) => {
-        addClass();
-      });
-    }
-  }, [params]);
-
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-
-  const today = new Date();
 
   return (
     <>
@@ -89,7 +65,7 @@ const App = () => {
               sm={{ span: 8, offset: 2 }}
             >
               <div className='box shadow-lg mt-5 p-4 text-center'>
-                <h1 className='heading mt-2'>Find Weather</h1>
+                <h1 className='heading'>Find Weather</h1>
                 <form className='mt-4' onSubmit={onSubmitForm}>
                   <input
                     type='text'
@@ -101,29 +77,17 @@ const App = () => {
                     }}
                   />
                 </form>
+
                 {params !== "" ? (
                   params.map((param) => {
                     return (
-                      <div key={param.id}>
-                        <h6 className='city mt-3'>
-                          <span className='name display-4'>
-                            {param.ctName},
-                          </span>
-                          {param.country}
-                        </h6>
-                        <h5 className='date mt-2'>
-                          {today.toLocaleDateString("en-US", options)}
-                        </h5>
-                        <h1 className='temp mt-4'>
-                          <img src={param.icon} />
-                          {param.temperature}&ordm;
-                        </h1>
-                        <h2 className='weather mt-2'>{param.weather}</h2>
-                      </div>
+                      <Data key={param.id} params={params} param={param} />
                     );
                   })
                 ) : (
-                  <p className='mt-3'>Sorry the city name does not exits.</p>
+                  <p className='mt-3'>
+                    Sorry the city name is incorrect or does not exits.
+                  </p>
                 )}
               </div>
             </Col>
